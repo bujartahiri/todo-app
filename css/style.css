@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(0,0,0,0.1);
+    font-family: 'Titillium Web', sans-serif;
+    background: #5f2c82; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5f2c82, #49a09d); 
+    background: linear-gradient(to right, #5f2c82, #49a09d); 
+}
