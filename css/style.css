@@ -8,8 +8,9 @@ body {
     background-color: rgba(0,0,0,0.1);
     font-family: 'Titillium Web', sans-serif;
     background: #5f2c82; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #5f2c82, #49a09d); 
-    background: linear-gradient(to right, #5f2c82, #49a09d); 
+    background: -webkit-linear-gradient(to right, #5f2c82, #49a09d) no-repeat center center fixed; 
+    background: linear-gradient(to right, #5f2c82, #49a09d) no-repeat center center fixed;
+    background-size: cover;
 }
 
 .container {

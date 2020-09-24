@@ -14,17 +14,46 @@ const options = {weekday: 'long', month: 'short', day: 'numeric'}
 const today = new Date()
 dateElement.innerHTML = today.toLocaleDateString('en-US', options)
 
+// static lists data
+let LIST = [] 
+let id = 0
+
 // add todo
-function addTodo (todo) {
+function addTodo (todo, id, done, trash) {
+    if (trash) return
+
+    const DONE = done ? check : uncheck
+    const LINETHROUGH = done ? lineThrough : ''
+
     const item = `
         <li class="item">
-            <i class="fa fa-circle-thin co" job="complete" id="0"></i>
-            <p class="text">${ todo }</p>
-            <i class="fa fa-trash-o de" job="delete" id="0"></i>
+            <i class="fa ${DONE} co" job="complete" id="${id}"></i>
+            <p class="text ${LINETHROUGH}">${ todo }</p>
+            <i class="fa fa-trash-o de" job="delete" id="${id}"></i>
         </li>
     `
 
     const position = 'beforeend'
     list.insertAdjacentHTML(position, item)
 }
-addTodo('drink coffee')
+
+// add todo on keypress(enter)
+document.addEventListener('keyup', function(e) {
+    if (e.keyCode == 13) {
+        const todo = input.value
+        if (todo) {
+            addTodo(todo, id, false, false)
+            LIST.push({
+                name: todo,
+                id: id,
+                done: false,
+                trash: false
+            })
+            id++
+        }
+        input.value = ''
+    }
+})
+
+
+
