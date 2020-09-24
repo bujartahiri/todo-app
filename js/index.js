@@ -15,8 +15,27 @@ const today = new Date()
 dateElement.innerHTML = today.toLocaleDateString('en-US', options)
 
 // static lists data
-let LIST = [] 
-let id = 0
+let LIST, id
+
+// get items from localstorage
+let data = localStorage.getItem('TODO')
+
+// check if data is not empty
+if (data) {
+    LIST = JSON.parse(data)
+    id = LIST.length // set id to the last one in the list
+    loadList(LIST) // load the list to the user interface
+} else {
+    LIST = []
+    id = 0
+}
+
+// load items to the user interface
+function loadList (array) {
+    array.forEach(function (item) {
+        addTodo(item.name, item.id, item.done, item.trash)
+    })
+}
 
 // add todo
 function addTodo (todo, id, done, trash) {
@@ -50,6 +69,9 @@ document.addEventListener('keyup', function(e) {
                 done: false,
                 trash: false
             })
+            // add item to localstorage
+            localStorage.setItem('TODO', JSON.stringify(LIST))
+            // increase id by 1 
             id++
         }
         input.value = ''
@@ -77,5 +99,7 @@ list.addEventListener('click', function(e) {
     } else if (elementJob == 'delete') {
         removeTodo(element)
     }
+    // update todo in localstorage
+    localStorage.setItem('TODO', JSON.stringify(LIST))
 })
 
