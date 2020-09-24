@@ -1,5 +1,5 @@
 // Selecting the html elements
-const clear = document.querySelector('.clear')
+const clear = document.querySelector('.clear-data')
 const dateElement = document.getElementById('date')
 const list = document.getElementById('list')
 const input = document.getElementById('input')
@@ -36,6 +36,12 @@ function loadList (array) {
         addTodo(item.name, item.id, item.done, item.trash)
     })
 }
+
+// clear the local storage (todos)
+clear.addEventListener('click', function () {
+    localStorage.clear()
+    location.reload()
+})
 
 // add todo
 function addTodo (todo, id, done, trash) {
