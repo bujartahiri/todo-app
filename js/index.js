@@ -41,6 +41,7 @@ function addTodo (todo, id, done, trash) {
 document.addEventListener('keyup', function(e) {
     if (e.keyCode == 13) {
         const todo = input.value
+        // if the input is not empty
         if (todo) {
             addTodo(todo, id, false, false)
             LIST.push({
@@ -55,5 +56,26 @@ document.addEventListener('keyup', function(e) {
     }
 })
 
-
+// complete todo 
+function completeTodo (element) {
+    element.classList.toggle(check)
+    element.classList.toggle(uncheck)
+    element.parentNode.querySelector('.text').classList.toggle(lineThrough)
+    LIST[element.id].done = LIST[element.id].done ? false : true
+}
+// remove todo
+function removeTodo (element) {
+    element.parentNode.parentNode.removeChild(element.parentNode)
+    LIST[element.id].trash = true
+}
+// target the items 
+list.addEventListener('click', function(e) {
+    const element = e.target // returns the clicked element inside the list
+    const elementJob = element.attributes.job.value // complete or delete
+    if (elementJob == 'complete') {
+        completeTodo(element)
+    } else if (elementJob == 'delete') {
+        removeTodo(element)
+    }
+})
 
